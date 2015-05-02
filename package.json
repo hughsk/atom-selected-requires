@@ -19,7 +19,6 @@
     "file-position": "0.0.0",
     "is-require": "0.0.1",
     "loophole": "^1.0.0",
-    "resolve": "^1.1.6",
     "static-eval": "^0.2.4"
   },
   "devDependencies": {},

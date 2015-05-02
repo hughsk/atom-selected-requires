@@ -4,7 +4,6 @@ const gFunction = global.Function
 global.Function = lFunction
 
 const isRequire = require('is-require')('require')
-const core      = require('resolve/lib/core.json')
 const position  = require('file-position')
 const seval     = require('static-eval')
 const acorn     = require('acorn')
@@ -45,7 +44,6 @@ function selected(editor) {
 
     var dst = node.evalled = node.evalled || seval(node.arguments[0], env)
     if (!dst) return
-    if (core.indexOf(dst) !== -1) return
 
     var included = false
 
