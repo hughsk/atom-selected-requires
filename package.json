@@ -1,6 +1,6 @@
 {
   "name": "atom-selected-requires",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Retrieve the paths of any require statements in the current selection.",
   "main": "index.js",
   "license": "MIT",
