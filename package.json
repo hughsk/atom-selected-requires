@@ -1,0 +1,42 @@
+{
+  "name": "atom-selected-requires",
+  "version": "1.0.0",
+  "description": "Retrieve the paths of any require statements in the current selection.",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo '\\n  Open this project in Atom and run the\\n  \"Window: Run Package Specs\" command.\\n\\n'"
+  },
+  "author": {
+    "name": "Hugh Kennedy",
+    "email": "hughskennedy@gmail.com",
+    "url": "http://hughsk.io/"
+  },
+  "dependencies": {
+    "acorn": "^1.0.3",
+    "astw": "^2.0.0",
+    "clone": "^1.0.2",
+    "file-position": "0.0.0",
+    "is-require": "0.0.1",
+    "loophole": "^1.0.0",
+    "resolve": "^1.1.6",
+    "static-eval": "^0.2.4"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hughsk/atom-selected-requires.git"
+  },
+  "keywords": [
+    "atom",
+    "editor",
+    "selection",
+    "require",
+    "detective",
+    "statement"
+  ],
+  "homepage": "https://github.com/hughsk/atom-selected-requires",
+  "bugs": {
+    "url": "https://github.com/hughsk/atom-selected-requires/issues"
+  }
+}
