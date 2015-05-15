@@ -35,7 +35,11 @@ describe('atom-selected-packages', function() {
       expect(packages[0]).toBe('first')
       expect(packages[1]).toBe('second')
       expect(packages[2]).toBe('third')
-      expect(packages.length).toBe(3)
+      expect(packages[3]).toBe('./fourth')
+      expect(packages[4]).toBe('./fifth')
+      expect(packages[5]).toBe('./sixth')
+      expect(packages[6]).toBe('./seventh')
+      expect(packages.length).toBe(7)
     })
   })
 
@@ -90,6 +94,86 @@ describe('atom-selected-packages', function() {
       expect(packages[0]).toBe('first')
       expect(packages[1]).toBe('third')
       expect(packages.length).toBe(2)
+    })
+  })
+
+  it('can select from "import" keyword', function(done) {
+    return openFile(fixture, function(editor) {
+      editor.setSelectedBufferRanges([
+        [[4, 0], [4, 1]]
+      ])
+
+      var packages   = selected(editor)
+      var selections = editor.getSelections().map(function(selection) {
+        return selection.getText()
+      })
+
+      expect(packages[0]).toBe('./fourth')
+      expect(packages.length).toBe(1)
+    })
+  })
+
+  it('can select from "import" specifiers', function(done) {
+    return openFile(fixture, function(editor) {
+      editor.setSelectedBufferRanges([
+        [[4, 10], [4, 11]]
+      ])
+
+      var packages   = selected(editor)
+      var selections = editor.getSelections().map(function(selection) {
+        return selection.getText()
+      })
+
+      expect(packages[0]).toBe('./fourth')
+      expect(packages.length).toBe(1)
+    })
+  })
+
+  it('can select from "from" keyword', function(done) {
+    return openFile(fixture, function(editor) {
+      editor.setSelectedBufferRanges([
+        [[4, 16], [4, 17]]
+      ])
+
+      var packages   = selected(editor)
+      var selections = editor.getSelections().map(function(selection) {
+        return selection.getText()
+      })
+
+      expect(packages[0]).toBe('./fourth')
+      expect(packages.length).toBe(1)
+    })
+  })
+
+  it('can select from "as" keyword', function(done) {
+    return openFile(fixture, function(editor) {
+      editor.setSelectedBufferRanges([
+        [[5, 11], [5, 12]]
+      ])
+
+      var packages   = selected(editor)
+      var selections = editor.getSelections().map(function(selection) {
+        return selection.getText()
+      })
+
+      expect(packages[0]).toBe('./fifth')
+      expect(packages.length).toBe(1)
+    })
+  })
+
+  it('can select from "import" strings', function(done) {
+    return openFile(fixture, function(editor) {
+      editor.setSelectedBufferRanges([
+        [[6, 20], [6, 21]]
+      ])
+
+      var packages   = selected(editor)
+      var selections = editor.getSelections().map(function(selection) {
+        return selection.getText()
+      })
+
+      expect(packages[0]).toBe('./sixth')
+      expect(packages.length).toBe(1)
     })
   })
 })

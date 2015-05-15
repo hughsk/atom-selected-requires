@@ -6,6 +6,7 @@ global.Function = lFunction
 const isRequire = require('is-require')('require')
 const position  = require('file-position')
 const seval     = require('static-eval')
+const escodegen = require('escodegen')
 const acorn     = require('acorn')
 const clone     = require('clone')
 const path      = require('path')
@@ -26,7 +27,8 @@ function selected(editor) {
     locations: true,
     ecmaVersion: 6,
     allowReturnOutsideFunction: true,
-    allowHashBang: true
+    allowHashBang: true,
+    sourceType: 'module'
   })
 
   var packages = []
@@ -44,27 +46,34 @@ function selected(editor) {
 
     var dst = node.evalled = node.evalled || seval(node.arguments[0], env)
     if (!dst) return
-
-    var included = false
-
-    for (var i = 0; i < ranges.length; i++) {
-      var loc = clone(node.loc)
-
-      loc.start.line--
-      loc.end.line--
-
-      var a = getIndex(lookup, ranges[i])
-      var b = getIndex(lookup, loc)
-
-      if (included = overlap(a, b)) break
-    }
-
-    if (!included) return
+    if (!included(lookup, node, ranges)) return
 
     packages.push(dst)
   })
 
+  astw(ast)(function(node) {
+    if (node.type !== 'ImportDeclaration') return
+    var source = node.source
+    if (source.type !== 'Literal') return
+    if (!included(lookup, node, ranges)) return
+    packages.push(source.value)
+  })
+
   return packages
+}
+
+function included(lookup, node, ranges) {
+  for (var i = 0; i < ranges.length; i++) {
+    var loc = clone(node.loc)
+
+    loc.start.line--
+    loc.end.line--
+
+    var a = getIndex(lookup, ranges[i])
+    var b = getIndex(lookup, loc)
+
+    if (overlap(a, b)) return true
+  }
 }
 
 function overlap(a, b) {

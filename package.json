@@ -21,7 +21,9 @@
     "loophole": "^1.0.0",
     "static-eval": "^0.2.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "escodegen": "^1.6.1"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/hughsk/atom-selected-requires.git"
