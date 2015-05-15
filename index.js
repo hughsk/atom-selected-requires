@@ -6,7 +6,6 @@ global.Function = lFunction
 const isRequire = require('is-require')('require')
 const position  = require('file-position')
 const seval     = require('static-eval')
-const escodegen = require('escodegen')
 const acorn     = require('acorn')
 const clone     = require('clone')
 const path      = require('path')
