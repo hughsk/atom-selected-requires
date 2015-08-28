@@ -6,10 +6,10 @@ global.Function = lFunction
 const isRequire = require('is-require')('require')
 const position  = require('file-position')
 const seval     = require('static-eval')
-const acorn     = require('acorn')
+const babylon   = require('babylon')
 const clone     = require('clone')
 const path      = require('path')
-const astw      = require('astw')
+const astw      = require('astw-babylon')
 
 global.Function = gFunction
 
@@ -22,12 +22,19 @@ function selected(editor) {
   var buffer = editor.getBuffer()
   var fpn    = editor.getPath()
   var src    = buffer.getText()
-  var ast    = acorn.parse(src, {
-    locations: true,
-    ecmaVersion: 6,
-    allowReturnOutsideFunction: true,
-    allowHashBang: true,
-    sourceType: 'module'
+  var ast    = babylon.parse(src, {
+      allowImportExportEverywhere: true,
+      allowReturnOutsideFunction: true,
+      allowHashBang: true,
+      ecmaVersion: 6,
+      strictMode: false,
+      sourceType: 'module',
+      locations: true,
+      features: {},
+      plugins: {
+          jsx: true,
+          flow: true
+      }
   })
 
   var packages = []
