@@ -13,8 +13,8 @@
     "url": "http://hughsk.io/"
   },
   "dependencies": {
-    "acorn": "^1.0.3",
-    "astw": "^2.0.0",
+    "astw-babylon": "^1.0.0",
+    "babylon": "^5.8.23",
     "clone": "^1.0.2",
     "file-position": "0.0.0",
     "is-require": "0.0.1",
